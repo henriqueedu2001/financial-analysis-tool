@@ -29,6 +29,7 @@ st.markdown(
 - ✅ Taxonomia editável carregada do YAML
 - ✅ OFX/CSV com prévia, validação, reconciliação e deduplicação
 - ✅ Consulta, filtros, correções auditáveis e regras locais
-- ⏳ Transferências, reconciliação avançada, métricas e exportações
+- ✅ Transferências reversíveis, ambiguidades e reconciliação por snapshots
+- ⏳ Métricas, dashboard e exportações
 """
 )

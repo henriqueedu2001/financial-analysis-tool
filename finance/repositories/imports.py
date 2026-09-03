@@ -25,6 +25,7 @@ from finance.models import (
     ReviewState,
     Transaction,
 )
+from finance.reconciliation import record_balance_snapshot
 
 
 class ImportConfirmationError(ValueError):
@@ -160,6 +161,17 @@ def confirm_import(
 
     for row in invalid:
         session.add(_create_invalid_raw(batch.id, row))
+
+    if preview.closing_balance_cents is not None and preview.period_end is not None:
+        record_balance_snapshot(
+            session,
+            account_id=account_id,
+            snapshot_date=preview.period_end,
+            balance_cents=preview.closing_balance_cents,
+            source_batch_id=batch.id,
+            source_note=f"Saldo final importado de {batch.source_file}",
+            commit=False,
+        )
 
     session.commit()
     return ImportResult(batch.id, len(preview.statement.transactions), len(invalid))

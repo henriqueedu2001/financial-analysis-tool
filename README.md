@@ -4,9 +4,9 @@ Aplicação local, de usuário único, para importar extratos convertidos em um 
 canônico, revisar movimentações e calcular análises financeiras determinísticas.
 Nenhuma integração bancária ou chamada a modelos de IA faz parte do MVP.
 
-> Estado atual: **Fase 3 — Movimentações e categorias**. Fundação, importação,
-> consulta, correções auditáveis, categorias e regras locais estão implementadas.
-> Transferências, métricas e exportação permanecem como próximas fases.
+> Estado atual: **Fase 4 — Transferências e reconciliação**. Fundação, importação,
+> consulta, correções, regras, transferências reversíveis e snapshots estão
+> implementados. Métricas e exportação permanecem como próximas fases.
 
 ## Privacidade e dados
 
@@ -79,6 +79,9 @@ ruff check .
 - Regras locais são determinísticas, têm prioridade explícita e são aplicadas
   somente a novas importações. Consulte
   [`docs/classification.md`](docs/classification.md).
+- Sugestões de transferência nunca confirmam pares automaticamente; ambiguidades
+  exigem escolha manual. Consulte
+  [`docs/transfers_reconciliation.md`](docs/transfers_reconciliation.md).
 
 As tabelas criadas são `accounts`, `import_batches`, `raw_transactions`,
 `transactions`, `transaction_edits`, `categories`, `classification_rules`,
@@ -126,8 +129,9 @@ data/                        dados pessoais locais ignorados pelo Git
    validação, reconciliação inicial, hashes, deduplicação, lotes e auditoria.
 3. **Movimentações e categorias (concluída):** consulta, filtros, edição auditável,
    CRUD por desativação e regras com precedência manual.
-4. **Transferências e reconciliação:** sugestões ambíguas e reversíveis,
-   associação manual, snapshots e tratamento explícito de divergências.
+4. **Transferências e reconciliação (concluída):** sugestões ambíguas e
+   reversíveis, associação manual, snapshots e tratamento explícito de
+   divergências.
 5. **Métricas e dashboard:** métricas financeiras testadas, séries mensais e
    gráficos Plotly.
 6. **Exportação:** CSV filtrado, resumo mensal e JSON analítico.
@@ -136,9 +140,9 @@ data/                        dados pessoais locais ignorados pelo Git
 
 ## Limitações atuais
 
-O OFX não classifica automaticamente transferências entre contas próprias; isso
-será feito de forma reversível na Fase 4. Um OFX sem saldo inicial oferece apenas um
-snapshot final, portanto não produz uma reconciliação independente. XLS e PDF são
-preservados na inbox, mas não são formatos de importação. Migrações de schema ainda
-não são necessárias antes do primeiro banco pessoal; Alembic será avaliado antes de
-alterações futuras de schema.
+Um OFX sem saldo inicial oferece apenas um snapshot final, portanto não produz uma
+reconciliação independente até existir outro saldo conhecido. A sugestão de
+transferências exige valores absolutos iguais; tarifas bancárias separadas continuam
+como movimentações próprias. XLS e PDF são preservados na inbox, mas não são
+formatos de importação. Migrações de schema ainda não são necessárias antes do
+primeiro banco pessoal; Alembic será avaliado antes de alterações futuras de schema.
