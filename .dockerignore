@@ -1,0 +1,13 @@
+**
+!Dockerfile
+!pyproject.toml
+!README.md
+!app.py
+!finance/
+!finance/**
+!pages/
+!pages/**
+!config/
+!config/**
+!examples/
+!examples/**

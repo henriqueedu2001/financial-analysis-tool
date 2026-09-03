@@ -1,0 +1,16 @@
+services:
+  finance:
+    image: financial-analysis-tool:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    ports:
+      - "${FINANCE_PORT:-8501}:8501"
+    environment:
+      FINANCE_DATABASE_URL: sqlite:////app/data/finance.sqlite
+      STREAMLIT_BROWSER_GATHER_USAGE_STATS: "false"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

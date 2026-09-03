@@ -4,9 +4,9 @@ Aplicação local, de usuário único, para importar extratos convertidos em um 
 canônico, revisar movimentações e calcular análises financeiras determinísticas.
 Nenhuma integração bancária ou chamada a modelos de IA faz parte do MVP.
 
-> Estado atual: **Fase 6 — MVP funcional**. Importação, revisão, transferências,
-> reconciliação, métricas, dashboard e exportações estão implementados. Resta o
-> empacotamento Docker solicitado para a entrega final.
+> Estado atual: **MVP funcional e empacotado**. Importação, revisão,
+> transferências, reconciliação, métricas, dashboard, exportações e execução por
+> Docker Compose estão implementados.
 
 ## Privacidade e dados
 
@@ -46,6 +46,31 @@ taxonomia inicial. Cadastre as contas em **Contas** e abra **Importação**. É 
 selecionar um arquivo já organizado em `data/inbox/` ou enviar um OFX/CSV. Para usar
 outro banco em testes ou desenvolvimento, defina uma URL SQLAlchemy em
 `FINANCE_DATABASE_URL`.
+
+### Executar com um comando via Docker
+
+Com Docker e Docker Compose instalados:
+
+```bash
+docker compose up --build
+```
+
+Acesse <http://localhost:8501>. Interrompa com `Ctrl+C`; para remover o contêiner
+depois, execute `docker compose down`. SQLite, inbox e arquivos brutos permanecem
+em `./data`, montado no contêiner como volume local. A pasta `data/` é excluída do
+contexto de build por `.dockerignore`, portanto os extratos não entram na imagem.
+
+Em sistemas cujo usuário não tenha UID/GID `1000`, execute:
+
+```bash
+LOCAL_UID=$(id -u) LOCAL_GID=$(id -g) docker compose up --build
+```
+
+Para usar outra porta local:
+
+```bash
+FINANCE_PORT=8600 docker compose up --build
+```
 
 ## Testar e verificar
 
@@ -140,8 +165,8 @@ data/                        dados pessoais locais ignorados pelo Git
    mensais e gráficos Plotly.
 6. **Exportação (concluída):** CSV filtrado, resumo mensal e JSON analítico sem
    descrições bancárias.
-7. **Empacotamento:** Docker Compose opcional para iniciar a aplicação com um único
-   comando, mantendo SQLite e extratos em volume local e fora da imagem.
+7. **Empacotamento (concluído):** Docker Compose opcional inicia a aplicação com um
+   único comando, mantendo SQLite e extratos em volume local e fora da imagem.
 
 ## Limitações atuais
 
