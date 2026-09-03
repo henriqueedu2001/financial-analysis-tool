@@ -31,6 +31,6 @@ st.markdown(
 - ✅ Consulta, filtros, correções auditáveis e regras locais
 - ✅ Transferências reversíveis, ambiguidades e reconciliação por snapshots
 - ✅ Métricas determinísticas, patrimônio, burn rate e dashboard
-- ⏳ Exportações estruturadas
+- ✅ Exportações CSV e JSON agregado para análise externa
 """
 )

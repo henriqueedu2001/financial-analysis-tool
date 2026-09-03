@@ -4,9 +4,9 @@ Aplicação local, de usuário único, para importar extratos convertidos em um 
 canônico, revisar movimentações e calcular análises financeiras determinísticas.
 Nenhuma integração bancária ou chamada a modelos de IA faz parte do MVP.
 
-> Estado atual: **Fase 5 — Métricas e dashboard**. As métricas financeiras centrais
-> e visualizações determinísticas estão implementadas. Exportação permanece como a
-> última fase funcional do MVP.
+> Estado atual: **Fase 6 — MVP funcional**. Importação, revisão, transferências,
+> reconciliação, métricas, dashboard e exportações estão implementados. Resta o
+> empacotamento Docker solicitado para a entrega final.
 
 ## Privacidade e dados
 
@@ -84,6 +84,8 @@ ruff check .
   [`docs/transfers_reconciliation.md`](docs/transfers_reconciliation.md).
 - Patrimônio, receitas, despesas, poupança, aporte, custo de vida, burn rate e
   cobertura seguem as definições em [`docs/metrics.md`](docs/metrics.md).
+- Exportações detalhadas e agregadas seguem o contrato descrito em
+  [`docs/exports.md`](docs/exports.md).
 
 As tabelas criadas são `accounts`, `import_batches`, `raw_transactions`,
 `transactions`, `transaction_edits`, `categories`, `classification_rules`,
@@ -136,7 +138,8 @@ data/                        dados pessoais locais ignorados pelo Git
    divergências.
 5. **Métricas e dashboard (concluída):** métricas financeiras testadas, séries
    mensais e gráficos Plotly.
-6. **Exportação:** CSV filtrado, resumo mensal e JSON analítico.
+6. **Exportação (concluída):** CSV filtrado, resumo mensal e JSON analítico sem
+   descrições bancárias.
 7. **Empacotamento:** Docker Compose opcional para iniciar a aplicação com um único
    comando, mantendo SQLite e extratos em volume local e fora da imagem.
 
