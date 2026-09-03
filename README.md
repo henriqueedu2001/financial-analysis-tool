@@ -42,10 +42,11 @@ streamlit run app.py
 ```
 
 Na primeira execução, a aplicação cria `data/finance.sqlite`, todas as tabelas e a
-taxonomia inicial. Cadastre as contas em **Contas** e abra **Importação**. É possível
-selecionar um arquivo já organizado em `data/inbox/` ou enviar um OFX/CSV. Para usar
-outro banco em testes ou desenvolvimento, defina uma URL SQLAlchemy em
-`FINANCE_DATABASE_URL`.
+taxonomia inicial. A tela inicial é a **Visão geral**, com indicadores e gráficos
+assim que houver movimentações importadas. Cadastre as contas em **Contas** e abra
+**Importação**. É possível selecionar um arquivo já organizado em `data/inbox/` ou
+enviar um OFX/CSV. Para usar outro banco em testes ou desenvolvimento, defina uma
+URL SQLAlchemy em `FINANCE_DATABASE_URL`.
 
 ### Executar com um comando via Docker
 

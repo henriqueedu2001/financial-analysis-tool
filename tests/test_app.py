@@ -11,5 +11,5 @@ def test_streamlit_home_executes_without_error(tmp_path, monkeypatch):
     app = AppTest.from_file(app_path).run(timeout=10)
 
     assert not app.exception
-    assert app.metric[0].value == "0"
-    assert int(app.metric[1].value) > 0
+    assert app.title[0].value == "Visão geral"
+    assert "Importe movimentações" in app.info[0].value
