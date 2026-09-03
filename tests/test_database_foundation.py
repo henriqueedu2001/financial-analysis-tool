@@ -27,6 +27,7 @@ def test_foundation_creates_all_planned_tables(db_session):
         "import_batches",
         "raw_transactions",
         "transactions",
+        "transaction_edits",
         "transfer_matches",
     }
     assert set(inspect(db_session.bind).get_table_names()) == expected

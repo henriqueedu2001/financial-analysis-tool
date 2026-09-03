@@ -7,6 +7,7 @@ from finance.models.entities import (
     RawTransaction,
     RawTransactionImmutable,
     Transaction,
+    TransactionEdit,
     TransferMatch,
 )
 from finance.models.enums import (
@@ -35,6 +36,7 @@ __all__ = [
     "ReviewState",
     "RuleMatchType",
     "Transaction",
+    "TransactionEdit",
     "TransactionNature",
     "TransferMatch",
     "TransferMatchState",

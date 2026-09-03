@@ -4,9 +4,9 @@ Aplicação local, de usuário único, para importar extratos convertidos em um 
 canônico, revisar movimentações e calcular análises financeiras determinísticas.
 Nenhuma integração bancária ou chamada a modelos de IA faz parte do MVP.
 
-> Estado atual: **Fase 2 — Importação**. A Fundação e a importação em duas etapas
-> de OFX/CSV estão implementadas. Edição, transferências, métricas e exportação
-> permanecem como próximas fases.
+> Estado atual: **Fase 3 — Movimentações e categorias**. Fundação, importação,
+> consulta, correções auditáveis, categorias e regras locais estão implementadas.
+> Transferências, métricas e exportação permanecem como próximas fases.
 
 ## Privacidade e dados
 
@@ -74,10 +74,15 @@ ruff check .
   importação parcial exige confirmação explícita.
 - Reimportações usam SHA-256 do conteúdo, não o nome do arquivo. Transações apenas
   parecidas são sinalizadas e nunca apagadas automaticamente.
+- Cada correção manual gera um registro append-only em `transaction_edits` e
+  bloqueia reclassificações automáticas futuras naquela movimentação.
+- Regras locais são determinísticas, têm prioridade explícita e são aplicadas
+  somente a novas importações. Consulte
+  [`docs/classification.md`](docs/classification.md).
 
 As tabelas criadas são `accounts`, `import_batches`, `raw_transactions`,
-`transactions`, `categories`, `classification_rules`, `transfer_matches` e
-`balance_snapshots`.
+`transactions`, `transaction_edits`, `categories`, `classification_rules`,
+`transfer_matches` e `balance_snapshots`.
 
 ## CSV canônico
 
@@ -119,13 +124,15 @@ data/                        dados pessoais locais ignorados pelo Git
    interface inicial e testes de infraestrutura/dinheiro.
 2. **Importação (concluída):** parser Pydantic para CSV, OFX XML/SGML, prévia,
    validação, reconciliação inicial, hashes, deduplicação, lotes e auditoria.
-3. **Movimentações e categorias:** consulta, filtros, edição, CRUD e regras com
-   precedência manual.
+3. **Movimentações e categorias (concluída):** consulta, filtros, edição auditável,
+   CRUD por desativação e regras com precedência manual.
 4. **Transferências e reconciliação:** sugestões ambíguas e reversíveis,
    associação manual, snapshots e tratamento explícito de divergências.
 5. **Métricas e dashboard:** métricas financeiras testadas, séries mensais e
    gráficos Plotly.
 6. **Exportação:** CSV filtrado, resumo mensal e JSON analítico.
+7. **Empacotamento:** Docker Compose opcional para iniciar a aplicação com um único
+   comando, mantendo SQLite e extratos em volume local e fora da imagem.
 
 ## Limitações atuais
 

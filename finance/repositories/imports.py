@@ -10,6 +10,7 @@ from pathlib import Path
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from finance.categorization import apply_first_matching_rule
 from finance.db.session import PROJECT_ROOT
 from finance.importers.hashing import raw_line_hash, transaction_signature
 from finance.importers.preview import ImportPreview
@@ -155,6 +156,7 @@ def confirm_import(
             raw_transaction_id=raw.id,
         )
         session.add(transaction)
+        apply_first_matching_rule(session, transaction)
 
     for row in invalid:
         session.add(_create_invalid_raw(batch.id, row))

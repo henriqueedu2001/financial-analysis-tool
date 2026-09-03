@@ -189,6 +189,8 @@ class Transaction(Base):
     subcategory_text: Mapped[str | None] = mapped_column(String(120))
     is_internal_transfer: Mapped[bool] = mapped_column(Boolean, default=False)
     is_extraordinary: Mapped[bool] = mapped_column(Boolean, default=False)
+    is_essential_override: Mapped[bool | None] = mapped_column(Boolean)
+    is_living_cost_override: Mapped[bool | None] = mapped_column(Boolean)
     review_state: Mapped[ReviewState] = enum_column(ReviewState, ReviewState.PENDING)
     confidence_basis_points: Mapped[int | None] = mapped_column(Integer)
     classification_source: Mapped[ClassificationSource] = enum_column(
@@ -210,6 +212,25 @@ class Transaction(Base):
     batch: Mapped[ImportBatch] = relationship(back_populates="transactions")
     raw_transaction: Mapped[RawTransaction] = relationship(back_populates="transaction")
     category: Mapped[Category | None] = relationship()
+    edits: Mapped[list[TransactionEdit]] = relationship(
+        back_populates="transaction", order_by="TransactionEdit.created_at"
+    )
+
+
+class TransactionEdit(Base):
+    """Append-only audit record for normalized transaction corrections."""
+
+    __tablename__ = "transaction_edits"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    transaction_id: Mapped[int] = mapped_column(
+        ForeignKey("transactions.id"), nullable=False, index=True
+    )
+    changes: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False)
+    reason: Mapped[str | None] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+
+    transaction: Mapped[Transaction] = relationship(back_populates="edits")
 
 
 class ClassificationRule(Base):
