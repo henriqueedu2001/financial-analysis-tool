@@ -1,0 +1,82 @@
+version: 1
+categories:
+  - name: Receitas
+    slug: receitas
+    children:
+      - {name: Salário, slug: receitas-salario, is_recurring: true}
+      - {name: Trabalho autônomo, slug: receitas-trabalho-autonomo}
+      - {name: Reembolso, slug: receitas-reembolso}
+      - {name: Rendimentos, slug: receitas-rendimentos}
+      - {name: Outras receitas, slug: receitas-outras}
+
+  - name: Moradia
+    slug: moradia
+    is_living_cost: true
+    children:
+      - {name: Aluguel, slug: moradia-aluguel, is_living_cost: true, is_essential: true, is_recurring: true}
+      - {name: Condomínio, slug: moradia-condominio, is_living_cost: true, is_essential: true, is_recurring: true}
+      - {name: Energia, slug: moradia-energia, is_living_cost: true, is_essential: true, is_recurring: true}
+      - {name: Água, slug: moradia-agua, is_living_cost: true, is_essential: true, is_recurring: true}
+      - {name: Internet, slug: moradia-internet, is_living_cost: true, is_essential: true, is_recurring: true}
+      - {name: Manutenção, slug: moradia-manutencao, is_living_cost: true}
+
+  - name: Alimentação
+    slug: alimentacao
+    is_living_cost: true
+    children:
+      - {name: Mercado, slug: alimentacao-mercado, is_living_cost: true, is_essential: true, is_recurring: true}
+      - {name: Restaurante, slug: alimentacao-restaurante, is_living_cost: true}
+      - {name: Delivery, slug: alimentacao-delivery, is_living_cost: true}
+      - {name: Padaria, slug: alimentacao-padaria, is_living_cost: true}
+
+  - name: Transporte
+    slug: transporte
+    is_living_cost: true
+    children:
+      - {name: Transporte público, slug: transporte-publico, is_living_cost: true, is_essential: true}
+      - {name: Aplicativo, slug: transporte-aplicativo, is_living_cost: true}
+      - {name: Combustível, slug: transporte-combustivel, is_living_cost: true}
+      - {name: Manutenção, slug: transporte-manutencao, is_living_cost: true}
+
+  - name: Saúde
+    slug: saude
+    is_living_cost: true
+    children:
+      - {name: Consultas, slug: saude-consultas, is_living_cost: true, is_essential: true}
+      - {name: Medicamentos, slug: saude-medicamentos, is_living_cost: true, is_essential: true}
+      - {name: Exames, slug: saude-exames, is_living_cost: true, is_essential: true}
+      - {name: Plano de saúde, slug: saude-plano, is_living_cost: true, is_essential: true, is_recurring: true}
+
+  - name: Educação
+    slug: educacao
+    is_living_cost: true
+    children:
+      - {name: Cursos, slug: educacao-cursos, is_living_cost: true}
+      - {name: Livros, slug: educacao-livros, is_living_cost: true}
+      - {name: Mensalidades, slug: educacao-mensalidades, is_living_cost: true, is_recurring: true}
+
+  - name: Lazer
+    slug: lazer
+    is_living_cost: true
+    children:
+      - {name: Entretenimento, slug: lazer-entretenimento, is_living_cost: true}
+      - {name: Viagens, slug: lazer-viagens, is_extraordinary_default: true}
+      - {name: Assinaturas, slug: lazer-assinaturas, is_living_cost: true, is_recurring: true}
+
+  - name: Compras
+    slug: compras
+    children:
+      - {name: Eletrônicos, slug: compras-eletronicos, is_extraordinary_default: true}
+      - {name: Vestuário, slug: compras-vestuario, is_living_cost: true}
+      - {name: Casa, slug: compras-casa}
+
+  - name: Tributos e tarifas
+    slug: tributos-tarifas
+    children:
+      - {name: Impostos, slug: tributos-impostos, is_living_cost: true, is_essential: true}
+      - {name: Tarifas bancárias, slug: tributos-tarifas-bancarias}
+      - {name: Juros e multas, slug: tributos-juros-multas}
+
+  - {name: Transferências internas, slug: transferencias-internas}
+  - {name: Ajustes, slug: ajustes}
+  - {name: A revisar, slug: a-revisar}

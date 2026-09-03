@@ -1,0 +1,6 @@
+transaction_date,account,description,amount,balance_after,nature,category,subcategory,is_internal_transfer,is_extraordinary,source_file,source_row,confidence
+2026-01-05,Conta Fluxo,SALARIO EMPRESA EXEMPLO,6000.00,7500.00,income,Receitas,Salário,false,false,extrato_fluxo_ficticio.pdf,2,0.99
+2026-01-06,Conta Fluxo,MERCADO BAIRRO EXEMPLO,-350.45,7149.55,expense,Alimentação,Mercado,false,false,extrato_fluxo_ficticio.pdf,3,0.94
+2026-01-08,Conta Fluxo,ENERGIA COMPANHIA FICTICIA,-180.20,6969.35,expense,Moradia,Energia,false,false,extrato_fluxo_ficticio.pdf,4,0.97
+2026-01-10,Conta Fluxo,TRANSFERENCIA PARA RESERVA,-2000.00,4969.35,transfer,Transferências internas,,true,false,extrato_fluxo_ficticio.pdf,5,0.98
+2026-01-12,Conta Fluxo,COMPRA EVENTUAL FICTICIA,-500.00,4469.35,expense,A revisar,A revisar,false,true,extrato_fluxo_ficticio.pdf,6,0.45
