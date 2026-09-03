@@ -30,6 +30,7 @@ st.markdown(
 - ✅ OFX/CSV com prévia, validação, reconciliação e deduplicação
 - ✅ Consulta, filtros, correções auditáveis e regras locais
 - ✅ Transferências reversíveis, ambiguidades e reconciliação por snapshots
-- ⏳ Métricas, dashboard e exportações
+- ✅ Métricas determinísticas, patrimônio, burn rate e dashboard
+- ⏳ Exportações estruturadas
 """
 )
