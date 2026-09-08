@@ -1,27 +1,11 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-build/
-dist/
-.venv/
-
-# Test and tooling caches
-.pytest_cache/
-.ruff_cache/
-.coverage
-htmlcov/
-
-# Editors and operating system
-.idea/
-.vscode/
-.DS_Store
-
-# Local configuration and secrets
-.env
-.streamlit/secrets.toml
-
-# Personal financial data. Keep the folders through .gitkeep only.
+# Dados financeiros locais: nunca versionar.
 data/**
 !data/**/
 !data/**/.gitkeep
+
+# Artefatos locais que serão recriados durante o novo desenvolvimento.
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
