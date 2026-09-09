@@ -56,6 +56,31 @@ própria, sem bloquear as demais. O segundo comando somente produz a tabela
 classificada quando todas as dimensões obrigatórias estiverem resolvidas. Consulte
 [`docs/classification.md`](docs/classification.md) para o contrato completo.
 
+## Fase 3: datas, saldos e séries diárias
+
+```bash
+python3 scripts/05_build_daily_series.py
+```
+
+O comando gera quatro tabelas reproduzíveis em `data/derived/`:
+
+* `transactions_dated.csv`, com data contábil e data efetiva preservadas;
+* `daily_balances.csv`, com saldo contábil e saldo analítico diário;
+* `daily_flows.csv`, com receitas, despesas e demais fluxos por dia;
+* `data_quality.csv`, com a origem das datas e reconciliação dos saldos.
+
+O Banco do Brasil exige tratamento explícito do Rende Fácil. O saldo contábil e
+a estimativa de liquidez operacional ficam em colunas distintas. Consulte
+[`docs/dates_balances.md`](docs/dates_balances.md) para as definições e limitações.
+
+O contrato dos gráficos futuros está em
+[`docs/visualization.md`](docs/visualization.md). Ele determina pontos conectados
+por linhas para séries temporais, eixos nomeados e a proibição de gráficos de
+pizza. As escolhas se apoiam nas documentações do
+[Plotly para linhas e pontos](https://plotly.com/python/line-charts/),
+[Plotly para eixos](https://plotly.com/python/axes/) e
+[GOV.UK para acessibilidade em gráficos](https://brand.design-system.service.gov.uk/data/).
+
 ## Testes
 
 ```bash
