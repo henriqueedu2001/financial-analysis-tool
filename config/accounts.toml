@@ -1,0 +1,11 @@
+[[accounts]]
+account_id = "banco_do_brasil_conta_corrente"
+institution = "Banco do Brasil"
+path_prefix = "banco_do_brasil"
+expected_bank_id = "1"
+
+[[accounts]]
+account_id = "itau_conta_corrente"
+institution = "Itaú"
+path_prefix = "itau"
+expected_bank_id = "0341"

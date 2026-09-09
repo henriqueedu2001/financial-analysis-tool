@@ -9,3 +9,8 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 *.egg-info/
+.coverage
+htmlcov/
+
+# Notebooks versionados não carregam saídas pessoais.
+.ipynb_checkpoints/
