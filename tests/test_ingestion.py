@@ -7,6 +7,7 @@ from finance_analysis.ingestion import (
     build_reconciliation,
     is_balance_marker,
     stable_transaction_id,
+    write_csv_atomic,
 )
 from finance_analysis.models import AccountDefinition
 from finance_analysis.ofx import parse_statement
@@ -83,3 +84,11 @@ def test_reconciliation_detects_exact_balance():
 
     assert result[0]["difference_cents"] == 0
     assert result[0]["status"] == "balanced"
+
+
+def test_csv_writer_uses_unix_line_endings(tmp_path: Path):
+    output = tmp_path / "example.csv"
+
+    write_csv_atomic(output, [{"value": "one"}], ["value"])
+
+    assert output.read_bytes() == b"value\none\n"

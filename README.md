@@ -81,6 +81,22 @@ pizza. As escolhas se apoiam nas documentações do
 [Plotly para eixos](https://plotly.com/python/axes/) e
 [GOV.UK para acessibilidade em gráficos](https://brand.design-system.service.gov.uk/data/).
 
+## Fase 4: cofrinho, aportes e deportes
+
+Atualize a série pública do CDI quando necessário e reconstrua o cofrinho:
+
+```bash
+python3 scripts/06_fetch_cdi_rates.py
+python3 scripts/07_build_cofrinho.py
+```
+
+A taxa diária oficial fica em `config/reference/cdi_daily.csv`; ela não contém
+dados pessoais. Os resultados privados ficam em `data/derived/`: eventos,
+saldos diários, resumo mensal e verificações de qualidade. O modelo usa a âncora
+de saldo guardada em `data/knowledge/financial_facts.toml`, 100% do CDI e somente
+os movimentos presentes nos extratos. Consulte
+[`docs/cofrinho.md`](docs/cofrinho.md) para método e limitações.
+
 ## Testes
 
 ```bash

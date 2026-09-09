@@ -340,7 +340,12 @@ def write_csv_atomic(path: Path, rows: Iterable[dict[str, object]], fieldnames: 
         prefix=f".{path.name}.",
         delete=False,
     ) as stream:
-        writer = csv.DictWriter(stream, fieldnames=fieldnames, extrasaction="raise")
+        writer = csv.DictWriter(
+            stream,
+            fieldnames=fieldnames,
+            extrasaction="raise",
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(materialized)
         temporary_path = Path(stream.name)
