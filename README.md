@@ -17,8 +17,8 @@ Requer Python 3.11 ou superior.
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e '.[dev]'
+python3 -m pip install --upgrade pip
+python3 -m pip install -e '.[dev]'
 ```
 
 ## Fase 1: inventário e normalização
@@ -27,8 +27,8 @@ Os OFX originais ficam imutáveis, separados por instituição, em
 `data/sources/`. Execute:
 
 ```bash
-python scripts/01_inventory_sources.py
-python scripts/02_build_canonical.py
+python3 scripts/01_inventory_sources.py
+python3 scripts/02_build_canonical.py
 ```
 
 O primeiro comando gera `data/derived/source_inventory.csv`. O segundo gera:
@@ -42,9 +42,23 @@ Os comandos são idempotentes. Arquivos repetidos são reconhecidos por SHA-256 
 movimentações sobrepostas são deduplicadas por conta e identificador bancário.
 Nenhum arquivo OFX é alterado.
 
+## Fase 2: classificação assistida
+
+```bash
+python3 scripts/03_prepare_classification.py
+python3 scripts/04_apply_classification.py
+```
+
+O primeiro comando agrupa contrapartes e cria uma fila de revisão ordenada pelo
+maior lançamento individual. Decisões e exceções ficam em `data/knowledge/`.
+Dúvidas adiadas recebem uma classificação explícita e uma fila de investigação
+própria, sem bloquear as demais. O segundo comando somente produz a tabela
+classificada quando todas as dimensões obrigatórias estiverem resolvidas. Consulte
+[`docs/classification.md`](docs/classification.md) para o contrato completo.
+
 ## Testes
 
 ```bash
-pytest
-ruff check .
+python3 -m pytest
+python3 -m ruff check .
 ```

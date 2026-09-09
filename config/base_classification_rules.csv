@@ -1,0 +1,21 @@
+rule_id,priority,match_type,match_value,valid_from,valid_to,min_amount_cents,max_amount_cents,nature,category,subcategory,recurrence,flexibility,cost_treatment,peak_eligible,notes,decision_source
+base-debit-card,10,channel,debit_card_purchase,,,,,expense,,,,,,,Compra no débito,system
+base-pix-sent,10,channel,pix_sent,,,,,expense,,,,,,,Pix enviado,system
+base-pix-received,10,channel,pix_received,,,,,income,,,,,,,Pix recebido,system
+base-pix-sent-refund,10,channel,pix_sent_refund,,,,,refund,Estornos,Pix devolvido,not_applicable,not_applicable,outside,false,Devolução de Pix enviado,system
+base-pix-received-reversal,10,channel,pix_received_reversal,,,,,adjustment,Estornos,Pix recebido devolvido,not_applicable,not_applicable,outside,false,Devolução de Pix recebido,system
+base-bb-rende-facil,10,channel,bb_rende_facil,,,,,internal_cash_management,Patrimônio,BB Rende Fácil,not_applicable,not_applicable,outside,false,Aplicação ou resgate automático,system
+base-bill-payment,10,channel,bill_payment,,,,,expense,,,,,,,Pagamento de boleto,system
+base-scheduled-debit,10,channel,scheduled_debit,,,,,expense,,,,,,,Débito agendado,system
+base-bank-iof,10,channel,bank_iof,,,,,expense,Tributos e tarifas,IOF,variable_habitual,mandatory,recurring,false,IOF bancário,system
+base-bank-interest,10,channel,bank_interest,,,,,expense,Tributos e tarifas,Juros bancários,variable_habitual,mandatory,recurring,false,Juros sobre saldo devedor,system
+base-credit-card,10,channel,credit_card_payment,,,,,expense,Cartão de crédito,Fatura sem detalhamento,variable_habitual,flexible,recurring,true,Fatura agregada sem extrato,system
+base-tax-payment,10,channel,tax_payment,,,,,expense,Tributos e tarifas,Impostos,non_recurring,mandatory,expanded,true,Pagamento de imposto,system
+base-cofrinho-application,10,channel,cofrinho_application,,,,,reserve_contribution,Patrimônio,Aporte no Cofrinho,not_applicable,not_applicable,outside,false,Aporte interno,system
+base-cofrinho-redemption,10,channel,cofrinho_redemption,,,,,deporte,Patrimônio,Deporte do Cofrinho,not_applicable,not_applicable,outside,false,Resgate interno,system
+base-investment-yield,10,channel,investment_yield,,,,,investment_return,Rendimentos,Rendimento automático,variable_habitual,not_applicable,outside,false,Rendimento financeiro,system
+base-card-insurance,10,channel,card_insurance,,,,,expense,Tributos e tarifas,Seguro de cartão,fixed_contractual,flexible,recurring,false,Seguro mensal,system
+base-pix-qr,10,channel,pix_qr_sent,,,,,expense,,,,,,,Pix QR enviado,system
+base-pix-transfer,10,channel,pix_transfer,,,,,,,,,,,,Pix transferido,system
+base-pix-refund,10,channel,pix_refund,,,,,refund,Estornos,Pix devolvido,not_applicable,not_applicable,outside,false,Devolução de Pix,system
+base-ted,10,channel,ted_transfer,,,,,,,,,,,,TED,system
