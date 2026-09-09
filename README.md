@@ -97,6 +97,19 @@ de saldo guardada em `data/knowledge/financial_facts.toml`, 100% do CDI e soment
 os movimentos presentes nos extratos. Consulte
 [`docs/cofrinho.md`](docs/cofrinho.md) para método e limitações.
 
+## Fase 5: métricas e picos
+
+```bash
+python3 scripts/08_build_metrics.py
+```
+
+O comando produz métricas mensais, gastos por categoria, custo de vida,
+poupança, índice de sobrevivência e uma análise robusta de picos. Meses com
+cobertura parcial ou incompleta são identificados e não contaminam as estatísticas
+principais. O modelo de picos usa mediana, MAD e escore Z modificado, além das
+decisões de recorrência e dos eventos associados durante a classificação.
+Consulte [`docs/metrics_peaks.md`](docs/metrics_peaks.md) para todas as definições.
+
 ## Testes
 
 ```bash
