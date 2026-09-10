@@ -1,0 +1,327 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[brazilian]{babel}
+\usepackage{fontspec}
+\setmainfont{DejaVu Sans}
+\setsansfont{DejaVu Sans}
+\usepackage{microtype}
+\usepackage[a4paper,top=20mm,bottom=19mm,left=19mm,right=19mm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{lastpage}
+
+\definecolor{Ink}{HTML}{25313C}
+\definecolor{Muted}{HTML}{5B6573}
+\definecolor{Primary}{HTML}{2166AC}
+\definecolor{Positive}{HTML}{1B7837}
+\definecolor{Negative}{HTML}{B2182B}
+\definecolor{Accent}{HTML}{7B3294}
+\definecolor{PaleBlue}{HTML}{EAF2F8}
+\definecolor{PaleOrange}{HTML}{FFF4E5}
+\definecolor{Rule}{HTML}{CBD5DC}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=Primary,
+  urlcolor=Primary,
+  pdftitle={Análise financeira pessoal},
+  pdfauthor={Pipeline local de análise financeira},
+  pdfsubject={Análise financeira descritiva e reproduzível}
+}
+\color{Ink}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist[itemize]{leftmargin=5mm,itemsep=3pt,topsep=3pt}
+\renewcommand{\arraystretch}{1.25}
+\captionsetup{font=small,labelfont=bf,textfont=it,justification=raggedright,singlelinecheck=false}
+
+\titleformat{\section}{\sffamily\bfseries\Large\color{Ink}}{}{0pt}{}
+\titleformat{\subsection}{\sffamily\bfseries\normalsize\color{Primary}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{0pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{3pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{Muted} Análise financeira pessoal}
+\fancyhead[R]{\footnotesize\color{Muted} @@LAST_COMPLETE_MONTH@@}
+\fancyfoot[L]{\footnotesize\color{Muted} Relatório privado gerado localmente}
+\fancyfoot[R]{\footnotesize\color{Muted} Página \thepage\ de \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newcommand{\KPI}[2]{%
+  \colorbox{PaleBlue}{%
+    \begin{minipage}[c][23mm][c]{0.445\textwidth}
+      \centering
+      {\sffamily\bfseries\Large\color{Primary} #1\par}
+      \vspace{1mm}
+      {\sffamily\footnotesize\color{Muted} #2\par}
+    \end{minipage}%
+  }%
+}
+\newcommand{\Callout}[1]{%
+  \colorbox{PaleOrange}{%
+    \begin{minipage}{0.925\textwidth}
+      \vspace{2mm}\small #1\vspace{2mm}
+    \end{minipage}%
+  }\par%
+}
+\newcommand{\Chart}[1]{%
+  \begin{center}
+    \includegraphics[width=\textwidth,height=0.57\textheight,keepaspectratio]{#1}
+  \end{center}%
+}
+\newcommand{\ChartCompact}[1]{%
+  \begin{center}
+    \includegraphics[width=\textwidth,height=0.46\textheight,keepaspectratio]{#1}
+  \end{center}%
+}
+\newcommand{\SourceNote}[2]{%
+  {\footnotesize\color{Muted} Período: #1. Fonte(s): #2.\par}
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \thispagestyle{empty}
+  \vspace*{28mm}
+  {\sffamily\bfseries\fontsize{29}{34}\selectfont Análise financeira pessoal\par}
+  \vspace{5mm}
+  {\color{Primary}\rule{\textwidth}{2.2pt}}
+  \vspace{8mm}
+  {\sffamily\large\color{Muted} Movimentações de @@PERIOD@@\par}
+  {\sffamily\large\color{Muted} Último mês completo: @@LAST_COMPLETE_MONTH@@\par}
+  \vspace{20mm}
+
+  \begin{tabularx}{\textwidth}{@{}X@{\hspace{4mm}}X@{}}
+    \KPI{@@LATEST_RESERVE@@}{Reserva no último mês completo} &
+    \KPI{@@LATEST_SURVIVAL@@ meses}{Índice de sobrevivência} \\
+    \addlinespace[4mm]
+    \KPI{@@LATEST_LIVING_COST@@}{Custo de vida no último mês} &
+    \KPI{@@AVERAGE_LIVING_COST@@}{Custo médio comparável} \\
+  \end{tabularx}
+
+  \vfill
+  \Callout{Este documento é uma análise descritiva gerada integralmente no computador local. Transferências próprias não são receitas nem despesas. O saldo do cofrinho é uma reconstrução determinística, ancorada no valor conhecido e remunerada a 100\% do CDI.}
+  \vspace{6mm}
+  {\footnotesize\color{Muted} Produzido por um pipeline reexecutável em Python e composto em LaTeX.\par}
+\end{titlepage}
+
+\section{Resumo executivo}
+
+A análise central utiliza os @@COMPARABLE_MONTHS@@ meses completos com cobertura simultânea do Banco do Brasil e do Itaú. O histórico anterior permanece visível nas séries temporais, mas não contamina médias que exigem comparabilidade entre as duas contas.
+
+\begin{tabularx}{\textwidth}{@{}X@{\hspace{4mm}}X@{}}
+  \KPI{@@TOTAL_INCOME@@}{Receitas externas comparáveis} &
+  \KPI{@@TOTAL_SAVINGS@@}{Poupança gerada no período} \\
+  \addlinespace[4mm]
+  \KPI{@@NET_RESERVE_CONTRIBUTION@@}{Aporte líquido no cofrinho} &
+  \KPI{@@COMPARABLE_PEAK_COUNT@@}{Picos nos meses comparáveis} \\
+\end{tabularx}
+
+\subsection{Conclusões principais}
+
+\begin{itemize}
+  \item O custo de vida recorrente foi de @@AVERAGE_LIVING_COST@@ em média e @@MEDIAN_LIVING_COST@@ na mediana. O coeficiente de variação de @@CV_LIVING_COST@@ indica oscilação moderada em torno desse patamar.
+  \item A poupança agregada foi @@TOTAL_SAVINGS@@: houve resultado positivo em apenas @@POSITIVE_SAVINGS_MONTHS@@ dos @@COMPARABLE_MONTHS@@ meses comparáveis.
+  \item @@WORST_SAVINGS_MONTH@@ concentrou o pior resultado: poupança de @@WORST_SAVINGS@@, despesa bruta de @@WORST_MONTH_GROSS_EXPENSE@@ e @@WORST_MONTH_ATYPICAL_EXPENSE@@ em gastos atípicos.
+  \item A reserva terminou @@LAST_COMPLETE_MONTH@@ em @@LATEST_RESERVE@@. O índice pontual foi @@LATEST_SURVIVAL@@ meses e cai para @@CONSERVATIVE_SURVIVAL@@ meses quando se usa o maior custo recorrente mensal observado.
+  \item Aportes e deportes totalizaram, respectivamente, @@RESERVE_CONTRIBUTION@@ e @@DEPORTES@@. O aporte líquido foi @@NET_RESERVE_CONTRIBUTION@@, conceito distinto da poupança gerada.
+  \item Restam @@UNKNOWN_TRANSACTIONS@@ de @@TRANSACTION_COUNT@@ transações sem identificação completa (@@UNKNOWN_TRANSACTION_PERCENT@@). A incerteza é preservada, em vez de redistribuída artificialmente.
+\end{itemize}
+
+\Callout{Leitura central: a reserva cresceu apesar de a poupança externa agregada ter sido negativa. Portanto, saldo do cofrinho, aportes e capacidade corrente de gerar excedente precisam ser acompanhados como fenômenos diferentes.}
+
+\clearpage
+\section{Dados, critérios e qualidade}
+
+\subsection{Escopo analítico}
+
+\begin{itemize}
+  \item Banco do Brasil e Itaú são consolidados, mas cada conta continua identificada em todas as etapas.
+  \item Valores monetários são tratados em centavos inteiros. A conversão para reais existe somente na apresentação.
+  \item Transferências internas, aplicações no cofrinho e deportes não entram nas receitas nem nas despesas externas.
+  \item O custo recorrente representa a rotina. Gastos atípicos reduzem a poupança observada, mas ficam fora da estimativa principal do custo de vida.
+  \item Picos são episódios não recorrentes cujo escore Z modificado excede 3,5. O modelo usa a mediana e o desvio absoluto mediano (MAD), reduzindo a influência dos próprios extremos.
+  \item O índice de sobrevivência de cada mês é o saldo estimado do cofrinho dividido pelo custo de vida recorrente daquele mês.
+\end{itemize}
+
+\subsection{Qualidade e reconciliações}
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.14\textwidth}>{\raggedright\arraybackslash}p{0.51\textwidth}@{}}
+\toprule
+\textbf{Verificação} & \textbf{Estado} & \textbf{Resultado} \\
+\midrule
+\endhead
+@@QUALITY_ROWS@@
+\bottomrule
+\end{longtable}
+
+No histórico completo, @@UNKNOWN_OUTFLOWS@@ de @@OUTFLOW_COUNT@@ saídas permanecem desconhecidas (@@UNKNOWN_OUTFLOW_PERCENT@@). Nos meses comparáveis, são @@COMPARABLE_UNKNOWN_OUTFLOW_COUNT@@ de @@COMPARABLE_OUTFLOW_COUNT@@ saídas (@@COMPARABLE_UNKNOWN_OUTFLOW_COUNT_PERCENT@@), somando @@COMPARABLE_UNKNOWN_OUTFLOW@@. Essas transações permanecem explicitamente não classificadas.
+
+\Callout{O período central vai de jan/2026 a ago/2026. Set/2026 é incompleto e aparece apenas onde a série diária permite; os agregados de comparação não o utilizam.}
+
+\clearpage
+\section{Saldos diários observados e estimados}
+
+@@CHART_01_SALDOS_DIARIOS_DESCRIPTION@@
+\Chart{@@CHART_01_SALDOS_DIARIOS@@}
+
+\subsection{Leitura}
+\begin{itemize}
+  \item Os saldos das contas correntes exibem ciclos de entrada concentrada, seguidos por consumo ao longo do mês.
+  \item A série do cofrinho começa somente quando a reconstrução possui informação suficiente. A âncora observada é distinguida dos demais pontos estimados.
+  \item O total monitorado inclui o dinheiro que permaneceu nas contas correntes; esse patrimônio não depende de um aporte ao cofrinho para existir.
+\end{itemize}
+\SourceNote{@@CHART_01_SALDOS_DIARIOS_PERIOD@@}{saldos diários e reconstrução do cofrinho}
+
+\clearpage
+\section{Receitas e gastos externos por dia}
+
+@@CHART_02_RECEITAS_GASTOS_DIARIOS_DESCRIPTION@@
+\Chart{@@CHART_02_RECEITAS_GASTOS_DIARIOS@@}
+
+\subsection{Leitura}
+\begin{itemize}
+  \item Receitas aparecem acima de zero e despesas abaixo, o que torna explícita a direção de cada fluxo.
+  \item O saldo diário externo é a diferença entre receitas e despesas do dia; ele não é o saldo acumulado da conta.
+  \item A concentração em poucos dias explica os picos verticais sem transformar transferências próprias em consumo.
+\end{itemize}
+\SourceNote{@@CHART_02_RECEITAS_GASTOS_DIARIOS_PERIOD@@}{fluxos diários classificados}
+
+\clearpage
+\section{Receitas, despesas e poupança por mês}
+
+@@CHART_03_RESULTADO_MENSAL_DESCRIPTION@@
+\Chart{@@CHART_03_RESULTADO_MENSAL@@}
+
+\subsection{Leitura}
+\begin{itemize}
+  \item Nos meses comparáveis, a receita externa somou @@TOTAL_INCOME@@. A despesa bruta foi @@TOTAL_GROSS_EXPENSE@@ e a despesa líquida de reembolsos foi @@TOTAL_NET_EXPENSE@@.
+  \item A poupança agregada foi @@TOTAL_SAVINGS@@, com resultado positivo em @@POSITIVE_SAVINGS_MONTHS@@ de @@COMPARABLE_MONTHS@@ meses.
+  \item O resultado agregado é sensível a @@WORST_SAVINGS_MONTH@@. Sem esse mês, a poupança dos demais meses teria sido @@SAVINGS_WITHOUT_WORST_MONTH@@; isso não apaga o gasto, mas localiza a principal ruptura do período.
+  \item Meses com aportes elevados podem ter poupança negativa, pois aporte é realocação patrimonial e poupança mede o excedente entre receita e despesa externas.
+\end{itemize}
+\SourceNote{@@CHART_03_RESULTADO_MENSAL_PERIOD@@}{métricas mensais}
+
+\clearpage
+\section{Custo de vida mensal}
+
+@@CHART_04_CUSTO_DE_VIDA_MENSAL_DESCRIPTION@@
+\Chart{@@CHART_04_CUSTO_DE_VIDA_MENSAL@@}
+
+\subsection{Leitura}
+\begin{itemize}
+  \item O centro da rotina ficou entre a média de @@AVERAGE_LIVING_COST@@ e a mediana de @@MEDIAN_LIVING_COST@@; o desvio-padrão foi @@STD_LIVING_COST@@.
+  \item O menor custo recorrente foi @@MIN_LIVING_COST@@ em @@MIN_LIVING_COST_MONTH@@; o maior, @@MAX_LIVING_COST@@ em @@MAX_LIVING_COST_MONTH@@.
+  \item A separação entre custo recorrente e gastos atípicos impede que caução, compras excepcionais e outros eventos inflem a estimativa da rotina.
+\end{itemize}
+\SourceNote{@@CHART_04_CUSTO_DE_VIDA_MENSAL_PERIOD@@}{métricas mensais classificadas}
+
+\clearpage
+\section{Cofrinho: aportes, deportes e saldo}
+
+@@CHART_05_COFRINHO_DESCRIPTION@@
+\Chart{@@CHART_05_COFRINHO@@}
+
+\subsection{Leitura}
+\begin{itemize}
+  \item Aportes totalizaram @@RESERVE_CONTRIBUTION@@ e deportes @@DEPORTES@@ nos meses comparáveis; o fluxo líquido foi @@NET_RESERVE_CONTRIBUTION@@.
+  \item O saldo evoluiu de @@RESERVE_OPENING@@ no início de jan/2026 para @@RESERVE_CLOSING@@ ao fim de ago/2026. A diferença é explicada pelo fluxo líquido e por @@RESERVE_INTEREST@@ de rendimento estimado a 100\% do CDI.
+  \item A frequência dos deportes mostra que a reserva também funcionou como amortecedor de liquidez mensal, e não somente como destino de acumulação.
+\end{itemize}
+\SourceNote{@@CHART_05_COFRINHO_PERIOD@@}{eventos do cofrinho, âncora conhecida e CDI oficial}
+
+\clearpage
+\section{Índice de sobrevivência}
+
+@@CHART_06_INDICE_SOBREVIVENCIA_DESCRIPTION@@
+\Chart{@@CHART_06_INDICE_SOBREVIVENCIA@@}
+
+\subsection{Leitura}
+\begin{itemize}
+  \item O índice do último mês completo foi @@LATEST_SURVIVAL@@ meses; a mediana mensal do período comparável foi @@MEDIAN_SURVIVAL@@ meses.
+  \item Sob uma leitura conservadora, dividindo a reserva atual pelo maior custo recorrente mensal observado, a cobertura é de @@CONSERVATIVE_SURVIVAL@@ meses.
+  \item O pico do índice em mai/2026 combina aumento da reserva com custo mensal excepcionalmente baixo. Isoladamente, ele não demonstra mudança estrutural.
+\end{itemize}
+\SourceNote{@@CHART_06_INDICE_SOBREVIVENCIA_PERIOD@@}{saldo mensal estimado do cofrinho e custo recorrente}
+
+\clearpage
+\section{Gastos por categoria}
+
+@@CHART_07_GASTOS_POR_CATEGORIA_DESCRIPTION@@
+\ChartCompact{@@CHART_07_GASTOS_POR_CATEGORIA@@}
+
+\begin{tabularx}{\textwidth}{@{}rXr@{}}
+\toprule
+\textbf{Posição} & \textbf{Categoria} & \textbf{Valor} \\
+\midrule
+@@CATEGORY_ROWS@@
+\bottomrule
+\end{tabularx}
+
+\subsection{Leitura}
+As duas maiores categorias somam @@TOP_TWO_CATEGORIES@@, ou @@TOP_TWO_CATEGORIES_PERCENT@@ do gasto observado nos meses comparáveis. As saídas não classificadas representam @@COMPARABLE_UNKNOWN_OUTFLOW_PERCENT@@ do gasto observado comparável. Alimentação e moradia, por serem simultaneamente grandes e recorrentes, são os alvos mais materiais para compreender a rotina; isso não implica que cortes sejam automaticamente desejáveis.
+
+\SourceNote{@@CHART_07_GASTOS_POR_CATEGORIA_PERIOD@@}{gastos mensais por categoria}
+
+\clearpage
+\section{Picos de gasto}
+
+@@CHART_08_PICOS_DE_GASTO_DESCRIPTION@@
+\ChartCompact{@@CHART_08_PICOS_DE_GASTO@@}
+
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.15\textwidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.22\textwidth}r@{}}
+\toprule
+\textbf{Data} & \textbf{Episódio} & \textbf{Categoria} & \textbf{Valor} \\
+\midrule
+@@PEAK_ROWS@@
+\bottomrule
+\end{tabularx}
+
+\subsection{Leitura}
+O modelo identificou @@PEAK_COUNT@@ picos no histórico, dos quais @@COMPARABLE_PEAK_COUNT@@ ocorreram nos meses comparáveis. Eles somam @@PEAK_TOTAL@@; a média é @@AVERAGE_PEAK@@, a mediana @@MEDIAN_PEAK@@ e os extremos vão de @@SMALLEST_PEAK@@ a @@LARGEST_PEAK@@. Há @@UNKNOWN_PEAK_COUNT@@ pico ainda não identificado.
+
+\SourceNote{@@CHART_08_PICOS_DE_GASTO_PERIOD@@}{episódios não recorrentes e modelo de escore Z modificado}
+
+\clearpage
+\section{Síntese opinativa baseada nas evidências}
+
+\subsection{1. A reserva existe, mas a margem ainda é curta}
+
+A evidência sustenta uma cobertura entre @@CONSERVATIVE_SURVIVAL@@ e @@LATEST_SURVIVAL@@ meses, conforme se use o maior custo recorrente observado ou o custo do último mês completo. Essa faixa é mais honesta que um único número: reconhece a variabilidade da rotina sem recorrer a projeções especulativas.
+
+\subsection{2. O crescimento do cofrinho não prova geração de poupança}
+
+O aporte líquido foi @@NET_RESERVE_CONTRIBUTION@@, enquanto a poupança externa agregada foi @@TOTAL_SAVINGS@@. A divergência mostra que o cofrinho recebeu recursos mesmo num intervalo em que receitas e despesas externas, no agregado, não geraram excedente. Parte importante desse resultado está concentrada em @@WORST_SAVINGS_MONTH@@: sem esse mês, os demais somariam @@SAVINGS_WITHOUT_WORST_MONTH@@ de poupança. Esses indicadores devem continuar separados.
+
+\subsection{3. O problema é concentrado, não difuso}
+
+A média e a mediana do custo recorrente são próximas, e o coeficiente de variação é @@CV_LIVING_COST@@. Já os picos somam @@PEAK_TOTAL@@ e se concentram em poucos episódios. Portanto, interpretar os extremos como se fossem rotina produziria uma estimativa exagerada do custo de vida.
+
+\subsection{4. A qualidade é suficiente para análise descritiva}
+
+Somente @@UNKNOWN_TRANSACTION_PERCENT@@ das transações permanecem não identificadas. Nos meses comparáveis, o valor desconhecido equivale a @@COMPARABLE_UNKNOWN_OUTFLOW_PERCENT@@ das saídas observadas. Isso não invalida os resultados, mas recomenda revisar primeiro as saídas desconhecidas de maior valor antes de conclusões mais granulares sobre categorias.
+
+\subsection{Próximos usos recomendados}
+
+\begin{itemize}
+  \item Usar a faixa de sobrevivência, não apenas o índice pontual, em decisões de segurança financeira.
+  \item Acompanhar separadamente poupança gerada, aporte líquido e rendimento estimado do cofrinho.
+  \item Revisar desconhecidos por materialidade e reexecutar o pipeline ao adicionar novos extratos.
+  \item Tratar deportes e picos como eventos explicáveis, sem incorporá-los automaticamente ao custo recorrente.
+\end{itemize}
+
+\Callout{Limites: o relatório descreve o histórico disponível e não constitui recomendação de investimento. A reconstrução do cofrinho omite movimentos ausentes dos extratos por decisão explícita e não estima os aportes posteriores à âncora conhecida.}
+
+\end{document}

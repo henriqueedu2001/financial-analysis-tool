@@ -1,0 +1,11 @@
+.git
+.gitignore
+.pytest_cache
+.ruff_cache
+.venv
+__pycache__
+*.egg-info
+data
+output
+tmp
+USER_PREFERENCES.md

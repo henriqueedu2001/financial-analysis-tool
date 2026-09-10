@@ -1,0 +1,17 @@
+name: financial-static-analysis
+
+services:
+  analysis:
+    build:
+      context: .
+    init: true
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    environment:
+      TECTONIC_CACHE_DIR: /var/cache/tectonic
+    volumes:
+      - ./data:/app/data
+      - ./output:/app/output
+      - tectonic-cache:/var/cache/tectonic
+
+volumes:
+  tectonic-cache:

@@ -12,5 +12,10 @@ __pycache__/
 .coverage
 htmlcov/
 
+# Relatórios pessoais gerados localmente.
+output/**
+!output/.gitkeep
+tmp/**
+
 # Notebooks versionados não carregam saídas pessoais.
 .ipynb_checkpoints/

@@ -4,6 +4,16 @@ Pipeline local e reproduzível para consolidar extratos bancários, classificar
 movimentações com revisão humana e produzir uma análise estática. Não é um
 aplicativo web.
 
+O caminho mais simples no Ubuntu é executar tudo com Docker:
+
+```bash
+docker compose run --rm --build analysis
+```
+
+O relatório final será publicado em
+`output/pdf/analise_financeira_pessoal.pdf`. Extratos, tabelas derivadas, gráficos,
+fonte LaTeX preenchida e PDF permanecem somente na máquina local.
+
 ## Privacidade
 
 Todo o conteúdo de `data/` é local e ignorado pelo Git, exceto os `.gitkeep` que
@@ -123,6 +133,45 @@ permanecem ignoradas pelo Git. A exportação usa Plotly e Kaleido e requer Goog
 Chrome ou Chromium disponível no sistema. Consulte
 [`docs/visualizations.md`](docs/visualizations.md) para as fontes, regras e
 arquivos gerados.
+
+## Fase 7: relatório final
+
+```bash
+python3 scripts/10_build_report.py
+```
+
+O relatório é necessariamente composto em LaTeX com Tectonic. O script gera a
+fonte privada em `output/latex/analise_financeira_pessoal.tex` e o documento em
+`output/pdf/analise_financeira_pessoal.pdf`. Ele procura o compilador indicado em
+`TECTONIC_BIN`, no `PATH` ou na instalação local do projeto
+`~/Projects/flike-tcc`. Consulte [`docs/report.md`](docs/report.md).
+
+## Pipeline completo
+
+Com o ambiente Python ativo e o Tectonic disponível:
+
+```bash
+python3 scripts/run_pipeline.py
+```
+
+Por padrão, a série pública do CDI já versionada é usada para manter a execução
+reproduzível. Para atualizá-la deliberadamente antes da análise:
+
+```bash
+python3 scripts/run_pipeline.py --refresh-cdi
+```
+
+No Ubuntu, a alternativa autocontida é instalar Docker Engine com o plugin
+Compose e executar um único comando:
+
+```bash
+docker compose run --rm --build analysis
+```
+
+Os diretórios `data/` e `output/` são montados no contêiner. Portanto, os OFX e
+os artefatos pessoais não entram na imagem. O primeiro uso baixa a imagem base,
+o Tectonic e seu conjunto de pacotes LaTeX; as execuções seguintes reutilizam o
+volume `tectonic-cache`.
 
 ## Testes
 
