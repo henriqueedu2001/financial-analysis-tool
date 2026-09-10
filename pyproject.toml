@@ -8,7 +8,10 @@ version = "0.1.0"
 description = "Pipeline local e reproduzível para análise financeira pessoal"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "kaleido>=1.0,<2",
+    "plotly>=6.1.1,<7",
+]
 
 [project.optional-dependencies]
 dev = [

@@ -110,6 +110,20 @@ principais. O modelo de picos usa mediana, MAD e escore Z modificado, além das
 decisões de recorrência e dos eventos associados durante a classificação.
 Consulte [`docs/metrics_peaks.md`](docs/metrics_peaks.md) para todas as definições.
 
+## Fase 6: gráficos estáticos
+
+```bash
+python3 scripts/09_build_visualizations.py
+```
+
+O comando gera oito figuras PNG e um manifesto em `data/reports/figures/`.
+Há gráficos de saldos diários, fluxos diários, resultado mensal, custo de vida,
+cofrinho, índice de sobrevivência, categorias e picos. As figuras são privadas e
+permanecem ignoradas pelo Git. A exportação usa Plotly e Kaleido e requer Google
+Chrome ou Chromium disponível no sistema. Consulte
+[`docs/visualizations.md`](docs/visualizations.md) para as fontes, regras e
+arquivos gerados.
+
 ## Testes
 
 ```bash

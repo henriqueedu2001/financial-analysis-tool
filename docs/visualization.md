@@ -9,6 +9,7 @@ Estas regras valem para todos os gráficos produzidos nas fases seguintes.
 3. Gráficos de pizza e rosca não serão usados. Composições por categoria usarão
    barras horizontais ordenadas, dot plots ou tabelas.
 4. Datas ficam em ordem cronológica e dias sem movimento permanecem visíveis.
+   Todos os eixos temporais exibem uma marca por mês.
 5. Cor não será o único meio de distinguir séries. Rótulos, símbolos ou padrões
    complementarão a paleta com contraste adequado.
 6. Séries relacionadas manterão cores consistentes em todo o relatório. Grades
